@@ -47,6 +47,47 @@
     })();
   }
 
+  var isTouch = window.matchMedia('(hover: none)').matches;
+  var serviceTiles = document.querySelectorAll('.service-tile');
+
+  serviceTiles.forEach(function (tile) {
+    tile.addEventListener('click', function (e) {
+      if (e.target.closest('.tile-more')) return;
+      if (!isTouch) return;
+      if (tile.classList.contains('touch-active')) return;
+      e.preventDefault();
+      serviceTiles.forEach(function (t) {
+        if (t !== tile) t.classList.remove('touch-active');
+      });
+      tile.classList.add('touch-active');
+    });
+  });
+
+  function closeAllPanels() {
+    document.querySelectorAll('.service-panel.open').forEach(function (p) {
+      p.classList.remove('open');
+    });
+  }
+
+  document.querySelectorAll('.tile-more').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var panel = document.getElementById(btn.getAttribute('data-panel'));
+      if (!panel) return;
+      var wasOpen = panel.classList.contains('open');
+      closeAllPanels();
+      if (!wasOpen) panel.classList.add('open');
+    });
+  });
+
+  document.querySelectorAll('.panel-close').forEach(function (btn) {
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var panel = btn.closest('.service-panel');
+      if (panel) panel.classList.remove('open');
+    });
+  });
+
   var menuBtn = document.getElementById('menu-btn');
   var mainNav = document.getElementById('main-nav');
 
