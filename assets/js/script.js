@@ -76,7 +76,14 @@
       if (!panel) return;
       var wasOpen = panel.classList.contains('open');
       closeAllPanels();
-      if (!wasOpen) panel.classList.add('open');
+      if (!wasOpen) {
+        panel.classList.add('open');
+        panel.addEventListener('transitionend', function scrollWhenOpen(ev) {
+          if (ev.propertyName !== 'grid-template-rows') return;
+          panel.removeEventListener('transitionend', scrollWhenOpen);
+          panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+      }
     });
   });
 

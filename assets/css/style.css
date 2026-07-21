@@ -561,6 +561,7 @@ section {
 .service-panel {
   display: grid;
   grid-template-rows: 0fr;
+  scroll-margin-top: 110px;
   transition: grid-template-rows 0.55s cubic-bezier(0.19, 1, 0.22, 1);
 }
 
