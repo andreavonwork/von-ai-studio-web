@@ -109,7 +109,7 @@ section {
   z-index: 3;
   pointer-events: none;
   background: radial-gradient(
-    20px circle at var(--mx, 50%) var(--my, 40%),
+    30px circle at var(--mx, 50%) var(--my, 40%),
     rgba(255, 255, 255, 0.75),
     rgba(255, 255, 255, 0.28) 55%,
     transparent 100%
@@ -487,6 +487,8 @@ section {
   transform: translateY(8px);
 }
 
+.tile-chevron { display: none; }
+
 .tile-overlay {
   position: absolute;
   inset: 0;
@@ -549,6 +551,26 @@ section {
 @media (hover: none) {
   .service-tile { aspect-ratio: auto; }
   .tile-bg { position: relative; aspect-ratio: 4 / 3; }
+
+  .tile-label {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+  }
+
+  .tile-chevron {
+    display: flex;
+    flex-shrink: 0;
+    width: 22px;
+    height: 22px;
+    color: var(--graphite);
+    transition: transform 0.35s ease;
+  }
+
+  .service-tile.touch-active .tile-chevron {
+    transform: rotate(180deg);
+  }
 }
 
 /* ============================================

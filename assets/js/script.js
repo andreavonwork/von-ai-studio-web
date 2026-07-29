@@ -50,6 +50,10 @@
   var isTouch = window.matchMedia('(hover: none)').matches;
   var serviceTiles = document.querySelectorAll('.service-tile');
 
+  if (isTouch && serviceTiles.length) {
+    serviceTiles[0].classList.add('touch-active');
+  }
+
   serviceTiles.forEach(function (tile) {
     tile.addEventListener('click', function (e) {
       if (e.target.closest('.tile-more')) return;
