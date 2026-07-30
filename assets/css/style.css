@@ -294,7 +294,7 @@ section {
 
 .hero-text {
   font-family: var(--sans);
-  font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+  font-size: clamp(0.95rem, 1.6vw, 1.1rem);
   line-height: 1.5;
   max-width: 600px;
   margin: 0 auto 48px;
