@@ -47,6 +47,45 @@
     })();
   }
 
+  /* ---------- AVA Space gallery (stacked carousel) ---------- */
+  var avaStage = document.getElementById('ava-stage');
+
+  if (avaStage) {
+    var avaItems = Array.prototype.slice.call(avaStage.querySelectorAll('.gallery-item'));
+    var avaPrev = document.getElementById('ava-prev');
+    var avaNext = document.getElementById('ava-next');
+    var avaIndexOut = document.getElementById('ava-index');
+    var avaIndex = 0;
+
+    function avaRender() {
+      avaItems.forEach(function (item, i) {
+        var offset = i - avaIndex;
+        // only the two neighbours on each side stay in the stack
+        item.setAttribute('data-pos', Math.abs(offset) > 2 ? 'far' : String(offset));
+      });
+      if (avaPrev) avaPrev.disabled = avaIndex === 0;
+      if (avaNext) avaNext.disabled = avaIndex === avaItems.length - 1;
+      if (avaIndexOut) avaIndexOut.textContent = String(avaIndex + 1);
+    }
+
+    function avaGo(i) {
+      avaIndex = Math.max(0, Math.min(avaItems.length - 1, i));
+      avaRender();
+    }
+
+    if (avaPrev) avaPrev.addEventListener('click', function () { avaGo(avaIndex - 1); });
+    if (avaNext) avaNext.addEventListener('click', function () { avaGo(avaIndex + 1); });
+
+    // clicking a stacked neighbour brings it to the front
+    avaItems.forEach(function (item, i) {
+      item.addEventListener('click', function () {
+        if (i !== avaIndex) avaGo(i);
+      });
+    });
+
+    avaRender();
+  }
+
   /* ---------- solutions carousel + panels ---------- */
   var solTrack = document.getElementById('sol-track');
 
