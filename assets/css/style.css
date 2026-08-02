@@ -13,8 +13,8 @@
   --ivory-rgb: 247, 245, 242;
   --accent-rgb: 93, 15, 34;
 
-  --serif: 'Cormorant Garamond', serif;
-  --sans: 'DM Sans', sans-serif;
+  --display: 'Archivo', sans-serif;
+  --body: 'Montserrat', sans-serif;
 
   --container: 1180px;
   --gutter: clamp(24px, 5vw, 80px);
@@ -30,8 +30,8 @@ body {
   margin: 0;
   background: var(--ivory);
   color: var(--graphite);
-  font-family: var(--sans);
-  font-weight: 300;
+  font-family: var(--body);
+  font-weight: 400;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
 }
@@ -66,8 +66,9 @@ a { color: inherit; text-decoration: none; }
 ul, ol { padding: 0; margin: 0; list-style: none; }
 
 h1, h2, h3, h4 {
-  font-family: var(--serif);
-  font-weight: 400;
+  font-family: var(--display);
+  font-weight: 600;
+  line-height: 1.25;
   margin: 0;
   color: var(--graphite);
 }
@@ -79,8 +80,10 @@ section {
 }
 
 .section-label {
-  font-family: var(--sans);
-  font-size: 0.75rem;
+  font-family: var(--display);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: 0.72rem;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--accent);
@@ -151,20 +154,22 @@ section {
 }
 
 .logo {
-  font-family: var(--serif);
-  font-size: 1.15rem;
-  letter-spacing: 0.08em;
-  font-weight: 500;
+  font-family: var(--display);
+  font-stretch: 125%;
+  font-size: 0.92rem;
+  letter-spacing: 0.14em;
+  font-weight: 600;
   white-space: nowrap;
 }
 
 .main-nav {
   display: flex;
-  gap: 36px;
+  gap: 26px;
 }
 
 .main-nav a {
-  font-size: 0.85rem;
+  font-size: 0.8rem;
+  font-weight: 500;
   letter-spacing: 0.03em;
   color: var(--graphite);
   opacity: 0.7;
@@ -185,7 +190,7 @@ section {
   border: 1px solid rgba(var(--graphite-rgb), 0.18);
   border-radius: 20px;
   padding: 6px 14px;
-  font-family: var(--sans);
+  font-family: var(--body);
   font-size: 0.75rem;
   letter-spacing: 0.05em;
   cursor: pointer;
@@ -233,8 +238,9 @@ section {
   padding: 14px 34px;
   border: 1px solid var(--accent);
   border-radius: 2px;
-  font-size: 0.85rem;
-  letter-spacing: 0.04em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   transition: background 0.3s ease, color 0.3s ease;
 }
 
@@ -273,6 +279,7 @@ section {
 
 .eyebrow {
   font-size: 0.78rem;
+  font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   opacity: 0.55;
@@ -280,16 +287,19 @@ section {
 }
 
 .hero-title {
-  font-family: var(--serif);
-  font-size: clamp(3rem, 9vw, 6rem);
-  letter-spacing: 0.03em;
-  line-height: 1;
+  font-family: var(--display);
+  font-stretch: 125%;
+  font-weight: 600;
+  font-size: clamp(1.85rem, 5.2vw, 3.5rem);
+  letter-spacing: 0.13em;
+  line-height: 1.15;
   margin-bottom: 20px;
 }
 
 .hero-subtitle {
-  font-family: var(--sans);
-  font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+  font-family: var(--body);
+  font-size: clamp(0.85rem, 1.4vw, 0.98rem);
+  font-weight: 500;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   color: var(--graphite);
@@ -298,7 +308,7 @@ section {
 }
 
 .hero-text {
-  font-family: var(--sans);
+  font-family: var(--body);
   font-size: clamp(0.95rem, 1.6vw, 1.1rem);
   line-height: 1.5;
   max-width: 600px;
@@ -350,7 +360,7 @@ section {
 }
 
 .bio-monogram {
-  font-family: var(--serif);
+  font-family: var(--display);
   font-style: italic;
   font-size: 14rem;
   color: var(--moka);
@@ -482,8 +492,9 @@ section {
 }
 
 .sol-tag {
-  font-size: 0.66rem;
-  letter-spacing: 0.16em;
+  font-size: 0.64rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
   text-transform: uppercase;
   color: var(--accent);
   margin-bottom: 18px;
@@ -501,8 +512,8 @@ section {
 .sol-icon svg { width: 100%; height: 100%; }
 
 .sol-title {
-  font-size: 1.35rem;
-  line-height: 1.22;
+  font-size: 1.1rem;
+  line-height: 1.32;
   transition: color 0.4s ease;
 }
 
@@ -526,8 +537,8 @@ section {
 }
 
 .sol-hover p {
-  font-size: 0.84rem;
-  line-height: 1.45;
+  font-size: 0.8rem;
+  line-height: 1.55;
 }
 
 .sol-arrow-icon {
@@ -641,15 +652,17 @@ section {
 }
 
 .sol-panel-inner > h3 {
-  font-size: clamp(1.6rem, 3vw, 2.1rem);
-  line-height: 1.2;
+  font-stretch: 125%;
+  font-size: clamp(1.25rem, 2.2vw, 1.65rem);
+  letter-spacing: 0.05em;
+  line-height: 1.28;
   margin-bottom: 14px;
   padding: 0 40px;
 }
 
 .sol-panel-sub {
-  font-size: 1rem;
-  line-height: 1.55;
+  font-size: 0.92rem;
+  line-height: 1.65;
   opacity: 0.75;
   max-width: 60ch;
   margin: 0 auto;
@@ -677,13 +690,13 @@ section {
 .sol-block-icon svg { width: 22px; height: 22px; }
 
 .sol-block h4 {
-  font-size: 1.1rem;
+  font-size: 0.98rem;
   margin-bottom: 8px;
 }
 
 .sol-block p {
-  font-size: 0.9rem;
-  line-height: 1.5;
+  font-size: 0.85rem;
+  line-height: 1.6;
   opacity: 0.75;
   max-width: 34ch;
   margin: 0 auto;
@@ -829,9 +842,10 @@ section {
   top: 22px;
   left: 24px;
   z-index: 2;
-  font-family: var(--serif);
-  font-style: italic;
-  font-size: 0.95rem;
+  font-family: var(--display);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   color: var(--accent);
   opacity: 0.8;
 }
@@ -846,8 +860,8 @@ section {
 }
 
 .tile-label h3 {
-  font-size: 1.65rem;
-  line-height: 1.2;
+  font-size: 1.28rem;
+  line-height: 1.3;
   color: var(--graphite);
 }
 
@@ -888,12 +902,13 @@ section {
 
 .tile-overlay h3 {
   color: var(--ivory);
-  font-size: 1.4rem;
+  font-size: 1.12rem;
   margin-bottom: 14px;
 }
 
 .tile-overlay > p {
-  font-size: 0.9rem;
+  font-size: 0.84rem;
+  line-height: 1.6;
   opacity: 0.85;
   margin-bottom: 20px;
 }
@@ -903,7 +918,7 @@ section {
   background: none;
   border: none;
   padding: 0;
-  font-family: var(--sans);
+  font-family: var(--body);
   font-size: 0.85rem;
   letter-spacing: 0.02em;
   color: var(--ivory);
@@ -1002,7 +1017,7 @@ section {
 }
 
 .panel-inner > h3 {
-  font-size: 1.8rem;
+  font-size: 1.4rem;
   margin-bottom: 32px;
   padding-right: 48px;
 }
@@ -1015,7 +1030,7 @@ section {
 
 .panel-lead h4,
 .panel-add h4 {
-  font-family: var(--sans);
+  font-family: var(--body);
   font-size: 0.78rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
@@ -1024,8 +1039,9 @@ section {
 }
 
 .panel-lead p {
-  font-family: var(--sans);
-  font-size: 1.2rem;
+  font-family: var(--body);
+  font-size: 1rem;
+  line-height: 1.7;
   max-width: 60ch;
 }
 
@@ -1036,7 +1052,7 @@ section {
 }
 
 .panel-group h4 {
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   margin-bottom: 14px;
 }
 
@@ -1097,8 +1113,9 @@ section {
 }
 
 .how-intro {
-  font-family: var(--sans);
-  font-size: 1.4rem;
+  font-family: var(--body);
+  font-size: 1.1rem;
+  line-height: 1.65;
   margin-bottom: 56px;
   max-width: 560px;
 }
@@ -1115,7 +1132,7 @@ section {
 }
 
 .how-block h3 {
-  font-size: 1.7rem;
+  font-size: 1.32rem;
   margin-bottom: 18px;
 }
 
@@ -1140,8 +1157,9 @@ section {
 }
 
 .how-phases li span {
-  font-family: var(--serif);
-  font-size: 1.1rem;
+  font-family: var(--display);
+  font-size: 0.9rem;
+  font-weight: 600;
   color: var(--accent);
   flex-shrink: 0;
   width: 28px;
@@ -1158,13 +1176,16 @@ section {
 }
 
 .project h2 {
-  font-size: clamp(2.2rem, 5vw, 3.2rem);
+  font-stretch: 125%;
+  font-size: clamp(1.7rem, 3.6vw, 2.4rem);
+  letter-spacing: 0.06em;
   margin-bottom: 20px;
 }
 
 .project-subtitle {
-  font-family: var(--sans);
-  font-size: 1.25rem;
+  font-family: var(--body);
+  font-size: 1.05rem;
+  line-height: 1.65;
   opacity: 0.75;
   max-width: 640px;
   margin-bottom: 56px;
@@ -1199,7 +1220,7 @@ section {
 }
 
 .project-col h4 {
-  font-family: var(--sans);
+  font-family: var(--body);
   font-size: 0.78rem;
   letter-spacing: 0.15em;
   text-transform: uppercase;
@@ -1250,7 +1271,9 @@ section {
 }
 
 .contact h2 {
-  font-size: clamp(2.4rem, 6vw, 3.6rem);
+  font-stretch: 125%;
+  font-size: clamp(1.8rem, 4vw, 2.6rem);
+  letter-spacing: 0.06em;
   margin-bottom: 20px;
 }
 
@@ -1275,7 +1298,7 @@ section {
   justify-content: space-between;
   padding: 22px 4px;
   border-top: 1px solid rgba(var(--graphite-rgb), 0.15);
-  font-size: 1.05rem;
+  font-size: 0.95rem;
   transition: color 0.25s ease;
 }
 
@@ -1286,7 +1309,8 @@ section {
 .contact-link:hover { color: var(--accent); }
 
 .contact-label {
-  font-size: 0.75rem;
+  font-size: 0.7rem;
+  font-weight: 600;
   letter-spacing: 0.15em;
   text-transform: uppercase;
   color: var(--accent);
@@ -1382,7 +1406,7 @@ section {
     pointer-events: auto;
   }
 
-  .main-nav a { font-size: 1.1rem; opacity: 0.85; }
+  .main-nav a { font-size: 0.95rem; opacity: 0.85; }
 
   .menu-btn { display: flex; }
 
@@ -1392,9 +1416,18 @@ section {
   section { padding: 72px 24px; }
 
   .hero { padding-top: 120px; }
+
+  /* side-by-side label/value can't hold a full email at this width */
+  .contact-link {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    font-size: 0.9rem;
+    word-break: break-word;
+  }
 }
 
 @media (max-width: 480px) {
   .lang-toggle { padding: 5px 10px; }
-  .logo { font-size: 1rem; }
+  .logo { font-size: 0.8rem; letter-spacing: 0.1em; }
 }
