@@ -47,6 +47,101 @@
     })();
   }
 
+  /* ---------- solutions carousel + panels ---------- */
+  var solTrack = document.getElementById('sol-track');
+
+  if (solTrack) {
+    var solCards = Array.prototype.slice.call(solTrack.querySelectorAll('.sol-card'));
+    var solPeek = document.getElementById('sol-peek');
+    var solNav = document.getElementById('sol-nav');
+    var solDots = Array.prototype.slice.call(document.querySelectorAll('.sol-dot'));
+
+    function solStep() {
+      if (solCards.length < 2) return solTrack.clientWidth;
+      return solCards[1].offsetLeft - solCards[0].offsetLeft;
+    }
+
+    function solMaxScroll() {
+      return solTrack.scrollWidth - solTrack.clientWidth;
+    }
+
+    function solAtEnd() {
+      return solTrack.scrollLeft >= solMaxScroll() - 4;
+    }
+
+    function solSync() {
+      if (solPeek) solPeek.classList.toggle('is-off', solAtEnd());
+      if (solNav) solNav.classList.toggle('is-back', solAtEnd());
+
+      if (solDots.length) {
+        var step = solStep();
+        var i = step ? Math.round(solTrack.scrollLeft / step) : 0;
+        i = Math.max(0, Math.min(solDots.length - 1, i));
+        solDots.forEach(function (d, n) { d.classList.toggle('is-active', n === i); });
+      }
+    }
+
+    solTrack.addEventListener('scroll', solSync, { passive: true });
+    window.addEventListener('resize', solSync);
+    solSync();
+
+    // hovering the faded right edge slides the peeking card fully into view
+    if (solPeek) {
+      solPeek.addEventListener('mouseenter', function () {
+        solTrack.scrollTo({ left: solMaxScroll(), behavior: 'smooth' });
+      });
+    }
+
+    if (solNav) {
+      solNav.addEventListener('click', function () {
+        if (solAtEnd()) {
+          solTrack.scrollTo({ left: 0, behavior: 'smooth' });
+        } else {
+          solTrack.scrollBy({ left: solStep(), behavior: 'smooth' });
+        }
+      });
+    }
+
+    function closeSolPanels() {
+      document.querySelectorAll('.sol-panel.open').forEach(function (p) {
+        p.classList.remove('open');
+      });
+      solCards.forEach(function (c) { c.classList.remove('is-open'); });
+    }
+
+    function openSolPanel(card) {
+      var panel = document.getElementById(card.getAttribute('data-sol'));
+      if (!panel) return;
+      var wasOpen = panel.classList.contains('open');
+      closeSolPanels();
+      if (wasOpen) return;
+
+      panel.classList.add('open');
+      card.classList.add('is-open');
+      panel.addEventListener('transitionend', function scrollWhenOpen(ev) {
+        if (ev.propertyName !== 'grid-template-rows') return;
+        panel.removeEventListener('transitionend', scrollWhenOpen);
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+    }
+
+    solCards.forEach(function (card) {
+      card.addEventListener('click', function () { openSolPanel(card); });
+      card.addEventListener('keydown', function (e) {
+        if (e.key !== 'Enter' && e.key !== ' ') return;
+        e.preventDefault();
+        openSolPanel(card);
+      });
+    });
+
+    document.querySelectorAll('.sol-panel-close').forEach(function (btn) {
+      btn.addEventListener('click', function (e) {
+        e.stopPropagation();
+        closeSolPanels();
+      });
+    });
+  }
+
   var isTouch = window.matchMedia('(hover: none)').matches;
   var serviceTiles = document.querySelectorAll('.service-tile');
 
