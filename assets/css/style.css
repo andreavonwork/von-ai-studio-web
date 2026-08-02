@@ -158,7 +158,7 @@ section {
   font-stretch: 125%;
   font-size: 0.92rem;
   letter-spacing: 0.14em;
-  font-weight: 600;
+  font-weight: 500;
   white-space: nowrap;
 }
 
@@ -289,7 +289,7 @@ section {
 .hero-title {
   font-family: var(--display);
   font-stretch: 125%;
-  font-weight: 600;
+  font-weight: 500;
   font-size: clamp(1.85rem, 5.2vw, 3.5rem);
   letter-spacing: 0.13em;
   line-height: 1.15;
@@ -552,24 +552,38 @@ section {
 .sol-peek {
   position: absolute;
   top: 0;
-  right: 0;
   bottom: 8px;
   width: 110px;
   z-index: 3;
   cursor: pointer;
-  background: linear-gradient(to left, rgba(var(--ivory-rgb), 0.92), rgba(var(--ivory-rgb), 0));
   transition: opacity 0.4s ease;
 }
 
+.sol-peek-end {
+  right: 0;
+  background: linear-gradient(to left, rgba(var(--ivory-rgb), 0.92), rgba(var(--ivory-rgb), 0));
+}
+
+.sol-peek-start {
+  left: 0;
+  background: linear-gradient(to right, rgba(var(--ivory-rgb), 0.92), rgba(var(--ivory-rgb), 0));
+}
+
+/* each edge only exists while there is something to scroll toward */
 .sol-peek.is-off {
   opacity: 0;
   pointer-events: none;
 }
 
-.sol-nav {
+.sol-navs {
   position: absolute;
   top: -58px;
   right: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.sol-nav {
   width: 44px;
   height: 44px;
   border-radius: 50%;
@@ -580,17 +594,21 @@ section {
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.45s ease;
+  transition: background 0.3s ease, color 0.3s ease,
+              opacity 0.3s ease, border-color 0.3s ease;
 }
 
 .sol-nav svg { width: 20px; height: 20px; }
 
-.sol-nav:hover {
+.sol-nav:hover:not(:disabled) {
   background: var(--accent);
   color: var(--ivory);
 }
 
-.sol-nav.is-back { transform: rotate(180deg); }
+.sol-nav:disabled {
+  opacity: 0.3;
+  cursor: default;
+}
 
 .sol-dots { display: none; }
 
@@ -743,7 +761,7 @@ section {
 /* mobile: native swipe, ~1.5 cards, dots instead of the arrow */
 @media (max-width: 720px) {
   .sol-card { flex: 0 0 72%; }
-  .sol-nav, .sol-peek { display: none; }
+  .sol-navs, .sol-peek { display: none; }
 
   .sol-dots {
     display: flex;
@@ -781,179 +799,173 @@ section {
   margin-top: 40px;
 }
 
+/* Same card language as the solutions carousel: rounded, borderless,
+   soft shadow, light top and an organic colour fill that rises on hover. */
 .service-tile {
   position: relative;
-  aspect-ratio: 4 / 5;
+  height: 440px;
+  border-radius: 20px;
   overflow: hidden;
-  border-radius: 6px;
-  border: 1px solid rgba(var(--graphite-rgb), 0.1);
+  background: var(--ivory);
+  box-shadow: 0 10px 30px rgba(var(--graphite-rgb), 0.07);
+  transition: transform 0.45s cubic-bezier(0.19, 1, 0.22, 1),
+              box-shadow 0.45s ease;
 }
 
-.tile-bg {
-  position: absolute;
-  inset: 0;
-  transition: transform 0.7s cubic-bezier(0.19, 1, 0.22, 1);
+.service-tile:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 20px 44px rgba(var(--graphite-rgb), 0.13);
 }
 
-.tile-1 .tile-bg { background: linear-gradient(150deg, var(--beige) 0%, var(--ivory) 130%); }
-.tile-2 .tile-bg { background: linear-gradient(150deg, var(--moka) 0%, var(--beige) 130%); }
-.tile-3 .tile-bg { background: linear-gradient(150deg, var(--beige) 0%, var(--moka) 130%); }
+.tile-1 { --fill: var(--beige); --ink: var(--graphite); }
+.tile-2 { --fill: var(--moka);  --ink: var(--graphite); }
+.tile-3 { --fill: var(--beige); --ink: var(--graphite); }
 
-.tile-bg img {
+.tile-fill {
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 45%;
+  z-index: 1;
+  color: var(--fill);
+  background: currentColor;
+  transition: height 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.tile-wave {
+  position: absolute;
+  bottom: 100%;
+  left: 0;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0.5;
-  filter: grayscale(55%) brightness(1.25) contrast(0.9);
+  height: 38px;
+  display: block;
 }
 
-.tile-1 .tile-bg img { object-position: center 25%; }
-.tile-2 .tile-bg img { object-position: center 20%; }
-.tile-3 .tile-bg img { object-position: center 30%; }
+.tile-wave path { fill: currentColor; }
 
-/* colour wash: lets the tile's own base tone show through the photo
-   so it reads as texture rather than a full photo */
-.tile-bg::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  opacity: 0.7;
-}
+.service-tile:hover .tile-fill,
+.service-tile.touch-active .tile-fill { height: 78%; }
 
-.tile-1 .tile-bg::before { background: linear-gradient(150deg, var(--beige) 0%, var(--ivory) 130%); }
-.tile-2 .tile-bg::before { background: linear-gradient(150deg, var(--moka) 0%, var(--beige) 130%); }
-.tile-3 .tile-bg::before { background: linear-gradient(150deg, var(--beige) 0%, var(--moka) 130%); }
-
-.tile-bg::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  z-index: 1;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
-}
-
-.service-tile:hover .tile-bg { transform: scale(1.06); }
-
-.tile-index {
-  position: absolute;
-  top: 22px;
-  left: 24px;
+.tile-content {
+  position: relative;
   z-index: 2;
-  font-family: var(--display);
-  font-size: 0.8rem;
+  height: 100%;
+  padding: 32px 26px 28px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.tile-tag {
+  font-size: 0.64rem;
   font-weight: 600;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
   color: var(--accent);
+  margin-bottom: 18px;
+}
+
+.tile-icon {
+  display: block;
+  width: 42px;
+  height: 42px;
+  margin-bottom: 16px;
+  color: var(--graphite);
   opacity: 0.8;
 }
 
-.tile-label {
-  position: absolute;
-  left: 24px;
-  right: 24px;
-  bottom: 24px;
-  z-index: 2;
-  transition: opacity 0.35s ease, transform 0.35s ease;
+.tile-icon svg { width: 100%; height: 100%; }
+
+.tile-title {
+  font-size: 1.2rem;
+  line-height: 1.32;
+  transition: color 0.4s ease;
 }
 
-.tile-label h3 {
-  font-size: 1.28rem;
-  line-height: 1.3;
-  color: var(--graphite);
-}
-
-.service-tile:hover .tile-label {
-  opacity: 0;
-  transform: translateY(8px);
-}
+.service-tile:hover .tile-title,
+.service-tile.touch-active .tile-title { color: var(--ink); }
 
 .tile-chevron { display: none; }
 
-.tile-overlay {
-  position: absolute;
-  inset: 0;
-  z-index: 3;
-  padding: 32px 28px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  background: rgba(var(--graphite-rgb), 0.84);
-  color: var(--ivory);
+.tile-reveal {
+  margin-top: 18px;
+  color: var(--ink);
   opacity: 0;
-  pointer-events: none;
-  transform: translateY(14px);
+  transform: translateY(10px);
   transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
-.service-tile:hover .tile-overlay,
-.service-tile.touch-active .tile-overlay {
+.service-tile:hover .tile-reveal,
+.service-tile.touch-active .tile-reveal {
   opacity: 1;
-  pointer-events: auto;
   transform: translateY(0);
 }
 
-.service-tile.touch-active .tile-label {
-  opacity: 0;
-  transform: translateY(8px);
-}
-
-.tile-overlay h3 {
-  color: var(--ivory);
-  font-size: 1.12rem;
-  margin-bottom: 14px;
-}
-
-.tile-overlay > p {
-  font-size: 0.84rem;
-  line-height: 1.6;
-  opacity: 0.85;
-  margin-bottom: 20px;
+.tile-reveal p {
+  font-size: 0.8rem;
+  line-height: 1.55;
 }
 
 .tile-more {
-  align-self: flex-start;
+  margin-top: 16px;
   background: none;
   border: none;
-  padding: 0;
+  padding: 0 0 2px;
   font-family: var(--body);
-  font-size: 0.85rem;
-  letter-spacing: 0.02em;
-  color: var(--ivory);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--ink);
   cursor: pointer;
-  border-bottom: 1px solid rgba(var(--ivory-rgb), 0.4);
-  padding-bottom: 2px;
-  transition: border-color 0.25s ease, opacity 0.25s ease;
+  border-bottom: 1px solid rgba(var(--graphite-rgb), 0.35);
+  transition: border-color 0.25s ease;
 }
 
-.tile-more:hover {
-  border-color: rgba(var(--ivory-rgb), 0.9);
-}
+.tile-more:hover { border-bottom-color: var(--ink); }
 
+/* no hover on touch: the chevron signals the card opens, and the card
+   grows with its content instead of reserving space for hidden copy */
 @media (hover: none) {
-  .service-tile { aspect-ratio: auto; }
-  .tile-bg { position: relative; aspect-ratio: 4 / 3; }
+  .service-tile { height: auto; }
 
-  .tile-label {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 16px;
-  }
+  /* a fixed band holding just the chevron, with a shallower wave so its
+     crest clears the title above it whatever the card height */
+  .tile-fill { height: 58px; }
+  .tile-wave { height: 24px; }
+  .service-tile.touch-active .tile-fill { height: 78%; }
+  .service-tile.touch-active .tile-wave { height: 38px; }
 
   .tile-chevron {
-    display: flex;
-    flex-shrink: 0;
+    display: block;
     width: 22px;
     height: 22px;
+    margin-top: 14px;
     color: var(--graphite);
     transition: transform 0.35s ease;
   }
 
-  .service-tile.touch-active .tile-chevron {
-    transform: rotate(180deg);
+  .service-tile.touch-active .tile-chevron { transform: rotate(180deg); }
+
+  .tile-reveal {
+    display: grid;
+    grid-template-rows: 0fr;
+    margin-top: 0;
+    opacity: 1;
+    transform: none;
+    transition: grid-template-rows 0.45s cubic-bezier(0.19, 1, 0.22, 1),
+                margin-top 0.45s ease;
+  }
+
+  .tile-reveal-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+
+  .service-tile.touch-active .tile-reveal {
+    grid-template-rows: 1fr;
+    margin-top: 18px;
   }
 }
 
@@ -1016,10 +1028,32 @@ section {
   color: var(--ivory);
 }
 
-.panel-inner > h3 {
-  font-size: 1.4rem;
-  margin-bottom: 32px;
+.panel-head {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: clamp(28px, 4vw, 48px);
+  align-items: center;
+  margin-bottom: 40px;
   padding-right: 48px;
+}
+
+.panel-photo {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 16px;
+}
+
+.panel-head h3 {
+  font-size: 1.4rem;
+}
+
+/* inside the head the lead sits under the title, so it drops its rule */
+.panel-head .panel-lead {
+  margin-top: 18px;
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
 .panel-lead {
@@ -1102,6 +1136,16 @@ section {
 @media (max-width: 640px) {
   .panel-inner { padding: 40px 20px 44px; }
   .panel-group ul { column-count: 1; }
+
+  .panel-head {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 22px;
+    padding-right: 0;
+  }
+
+  .panel-photo { max-width: 190px; }
 }
 
 /* ============================================
@@ -1192,18 +1236,21 @@ section {
 }
 
 .project-shots {
-  display: grid;
-  grid-template-columns: 1.3fr 1fr;
-  gap: 24px;
+  column-count: 3;
+  column-gap: 20px;
   margin-bottom: 64px;
 }
 
 .project-shots img {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto;
+  display: block;
+  margin-bottom: 20px;
+  break-inside: avoid;
+  border-radius: 16px;
   border: 1px solid rgba(var(--graphite-rgb), 0.12);
   background: var(--ivory);
+  box-shadow: 0 8px 24px rgba(var(--graphite-rgb), 0.06);
 }
 
 .project-grid {
@@ -1374,7 +1421,7 @@ section {
   }
 
   .project-shots {
-    grid-template-columns: 1fr;
+    column-count: 2;
   }
 }
 
@@ -1416,6 +1463,8 @@ section {
   section { padding: 72px 24px; }
 
   .hero { padding-top: 120px; }
+
+  .project-shots { column-count: 1; }
 
   /* side-by-side label/value can't hold a full email at this width */
   .contact-link {

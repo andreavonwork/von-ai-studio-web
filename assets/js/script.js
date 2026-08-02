@@ -52,8 +52,10 @@
 
   if (solTrack) {
     var solCards = Array.prototype.slice.call(solTrack.querySelectorAll('.sol-card'));
-    var solPeek = document.getElementById('sol-peek');
-    var solNav = document.getElementById('sol-nav');
+    var solPeekStart = document.getElementById('sol-peek-start');
+    var solPeekEnd = document.getElementById('sol-peek-end');
+    var solPrev = document.getElementById('sol-prev');
+    var solNext = document.getElementById('sol-next');
     var solDots = Array.prototype.slice.call(document.querySelectorAll('.sol-dot'));
 
     function solStep() {
@@ -65,13 +67,22 @@
       return solTrack.scrollWidth - solTrack.clientWidth;
     }
 
+    function solAtStart() {
+      return solTrack.scrollLeft <= 4;
+    }
+
     function solAtEnd() {
       return solTrack.scrollLeft >= solMaxScroll() - 4;
     }
 
     function solSync() {
-      if (solPeek) solPeek.classList.toggle('is-off', solAtEnd());
-      if (solNav) solNav.classList.toggle('is-back', solAtEnd());
+      var atStart = solAtStart();
+      var atEnd = solAtEnd();
+
+      if (solPeekStart) solPeekStart.classList.toggle('is-off', atStart);
+      if (solPeekEnd) solPeekEnd.classList.toggle('is-off', atEnd);
+      if (solPrev) solPrev.disabled = atStart;
+      if (solNext) solNext.disabled = atEnd;
 
       if (solDots.length) {
         var step = solStep();
@@ -81,26 +92,24 @@
       }
     }
 
+    function solScrollBy(dir) {
+      solTrack.scrollBy({ left: dir * solStep(), behavior: 'smooth' });
+    }
+
     solTrack.addEventListener('scroll', solSync, { passive: true });
     window.addEventListener('resize', solSync);
     solSync();
 
-    // hovering the faded right edge slides the peeking card fully into view
-    if (solPeek) {
-      solPeek.addEventListener('mouseenter', function () {
-        solTrack.scrollTo({ left: solMaxScroll(), behavior: 'smooth' });
-      });
+    // hovering either faded edge slides the card on that side into view
+    if (solPeekStart) {
+      solPeekStart.addEventListener('mouseenter', function () { solScrollBy(-1); });
+    }
+    if (solPeekEnd) {
+      solPeekEnd.addEventListener('mouseenter', function () { solScrollBy(1); });
     }
 
-    if (solNav) {
-      solNav.addEventListener('click', function () {
-        if (solAtEnd()) {
-          solTrack.scrollTo({ left: 0, behavior: 'smooth' });
-        } else {
-          solTrack.scrollBy({ left: solStep(), behavior: 'smooth' });
-        }
-      });
-    }
+    if (solPrev) solPrev.addEventListener('click', function () { solScrollBy(-1); });
+    if (solNext) solNext.addEventListener('click', function () { solScrollBy(1); });
 
     function closeSolPanels() {
       document.querySelectorAll('.sol-panel.open').forEach(function (p) {
