@@ -76,7 +76,8 @@ h1, h2, h3, h4 {
 p { margin: 0; }
 
 section {
-  padding: clamp(80px, 12vw, 160px) var(--gutter);
+  padding: clamp(52px, 7.5vw, 104px) var(--gutter);
+  scroll-margin-top: 92px;
 }
 
 .section-label {
@@ -1593,7 +1594,7 @@ section {
   .menu-btn.open span:first-child { transform: translateY(3px) rotate(45deg); }
   .menu-btn.open span:last-child { transform: translateY(-3px) rotate(-45deg); }
 
-  section { padding: 72px 24px; }
+  section { padding: 46px 24px; }
 
   .hero { padding-top: 120px; }
 
