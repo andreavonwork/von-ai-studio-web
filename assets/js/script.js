@@ -47,7 +47,7 @@
     })();
   }
 
-  /* ---------- AVA Space gallery (stacked carousel) ---------- */
+  /* ---------- project gallery (stacked carousel) ---------- */
   var avaStage = document.getElementById('ava-stage');
 
   if (avaStage) {

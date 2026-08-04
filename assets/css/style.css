@@ -1255,7 +1255,7 @@ section {
   margin-bottom: 56px;
 }
 
-/* AVA Space gallery: one shot centred, neighbours stacked behind and
+/* Project gallery: one shot centred, neighbours stacked behind and
    blurred. Slides share a fixed frame and the images sit inside with
    object-fit:contain, so every capture shows whole whatever its ratio. */
 .project-gallery {
