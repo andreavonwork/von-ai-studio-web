@@ -68,7 +68,7 @@ class Component extends DCLogic {
     var collect = () => {
       var root = el.parentNode; if (!root) return;
       var skip = '.glass, .glass-2, header, #ficha, .fab';
-      s.txt = Array.prototype.filter.call(root.querySelectorAll('.content h1, .content h2, .content h3, .content p, .content .lbl, .content summary, .content li, .content .cta-link, .content .split-line, .content .marq span'), (n) => !n.closest(skip) && n.textContent.trim().length > 0);
+      s.txt = Array.prototype.filter.call(root.querySelectorAll('.content footer .foot-grid > div, .content footer .wrap > div:last-child, .content [aria-label^="Rubros"] .rub, .content h1, .content h2, .content h3, .content p, .content .lbl, .content summary, .content li, .content .cta-link, .content .split-line, .content .marq span'), (n) => !n.closest(skip) && n.textContent.trim().length > 0);
       s.glass = Array.prototype.filter.call(root.querySelectorAll('.content .glass, .content .glass-2'), (n) => n.offsetWidth > 160 && !n.parentNode.closest('.glass, .glass-2'));
     };
     collect();
@@ -296,15 +296,15 @@ function tpl(v) {
 </div>
 <div class="hero-shot" onPointerMove="${onTilt}" onPointerLeave="${offTilt}" style="transform: ${tiltTf}">
 <div class="glass" style="padding: 12px; border-radius: 30px">
-<img src="/img/apple-service-panel.webp" width="1440" height="812" fetchpriority="high" alt="Panel de un sistema de gestión para servicio técnico: ingresos, reparaciones activas, gastos, ganancia y stock crítico" style="width: 100%; display: block; border-radius: 20px" />
+<img src="/img/sistema-von-ai-studio.webp" width="1440" height="800" fetchpriority="high" alt="Panel del sistema de gestión de VON AI Studio: cobros del mes, prospectos, gastos y tareas del día" style="width: 100%; height: auto; display: block; border-radius: 20px" />
 </div>
 <div class="glass float-a" style="position: absolute; left: -34px; bottom: 54px; padding: 14px 18px; border-radius: 20px; display: flex; align-items: center; gap: 12px">
-<span style="width: 38px; height: 38px; border-radius: 50%; background: var(--warnbg); color: var(--warn); display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3l9.5 17h-19z"></path><path d="M12 10v4M12 17.5v.5"></path></svg></span>
-<div><div class="lbl" style="font-size: 8px">Aviso automático</div><div class="t" style="font-size: 15px; margin-top: 2px">3 productos con stock bajo</div></div>
+<span style="width: 38px; height: 38px; border-radius: 50%; background: var(--warnbg); color: var(--warn); display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="8.5"></circle><path d="M12 7.5V12l3 2"></path></svg></span>
+<div><div class="lbl" style="font-size: 8px">Aviso automático</div><div class="t" style="font-size: 15px; margin-top: 2px">2 tareas atrasadas</div></div>
 </div>
 <div class="glass float-b" style="position: absolute; right: -26px; top: -26px; padding: 14px 18px; border-radius: 20px; display: flex; align-items: center; gap: 12px">
 <span style="width: 38px; height: 38px; border-radius: 50%; background: var(--okbg); color: var(--ok); display: flex; align-items: center; justify-content: center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>
-<div><div class="lbl" style="font-size: 8px">Reparación #0003</div><div class="t" style="font-size: 15px; margin-top: 2px">Lista para entregar</div></div>
+<div><div class="lbl" style="font-size: 8px">CRM</div><div class="t" style="font-size: 15px; margin-top: 2px">Prospecto nuevo cargado</div></div>
 </div>
 </div>
 </div>
@@ -392,19 +392,21 @@ ${(steps).map((p) => html`
 </section>
 
 <section class="band" id="caso" style="padding: 40px 0 130px">
-<div class="wrap two-col">
-<div class="rise">
-<div class="lbl acc">Caso real</div>
-<h2 class="t h2" style="margin: 14px 0 0; font-size: 44px; line-height: 1.1">Apple Service Salta, mi propio servicio técnico</h2>
-<p style="margin: 18px 0 0; font-size: 17px; line-height: 1.6; color: var(--fg2)">Operaba con cuadernos y planillas sueltas. Hoy ventas, stock, reparaciones, clientes, caja y lista de precios viven en un solo sistema. Es el mismo punto de partida que uso con cada cliente.</p>
-<div style="display: grid; gap: 12px; margin-top: 26px">
-<div style="display: flex; gap: 14px; align-items: center; font-size: 16px"><span style="width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; background: var(--okbg); color: var(--ok); display: flex; align-items: center; justify-content: center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Cada reparación con su estado, del ingreso a la entrega</div>
-<div style="display: flex; gap: 14px; align-items: center; font-size: 16px"><span style="width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; background: var(--okbg); color: var(--ok); display: flex; align-items: center; justify-content: center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Aviso de stock crítico por modelo y color</div>
-<div style="display: flex; gap: 14px; align-items: center; font-size: 16px"><span style="width: 30px; height: 30px; flex-shrink: 0; border-radius: 50%; background: var(--okbg); color: var(--ok); display: flex; align-items: center; justify-content: center"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Ingresos, gastos y ganancia del día, la semana o el mes</div>
+<div class="wrap">
+<div class="rise" style="max-width: 720px"><div class="lbl acc">Casos reales</div><h2 class="t h2" style="margin: 14px 0 0; font-size: 44px; line-height: 1.1">Primero los construí para mis propios negocios</h2><p style="margin: 18px 0 0; font-size: 17px; line-height: 1.6; color: var(--fg2)">Los uso todos los días. Lo que aprendí ordenando mis negocios es lo que aplico en el tuyo.</p></div>
+<div class="two-col" style="margin-top: 40px; align-items: stretch; gap: 18px">
+<div class="glass lift rise" style="padding: 32px; border-radius: 28px">
+<div class="lbl acc" style="font-size: 10px">Servicio técnico</div>
+<h3 class="t" style="margin: 12px 0 0; font-size: 26px; line-height: 1.15">Apple Service Salta</h3>
+<p style="margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: var(--fg2)">Operaba con cuadernos y planillas sueltas. Hoy ventas, stock, reparaciones, clientes y caja viven en un solo sistema.</p>
+<div style="display: grid; gap: 10px; margin-top: 20px"><div style="display: flex; gap: 12px; align-items: center; font-size: 15px"><span style="width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; background: var(--okbg); color: var(--ok); display: flex; align-items: center; justify-content: center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Cada reparación con su estado, del ingreso a la entrega</div><div style="display: flex; gap: 12px; align-items: center; font-size: 15px"><span style="width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; background: var(--okbg); color: var(--ok); display: flex; align-items: center; justify-content: center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Aviso de stock crítico por modelo y color</div><div style="display: flex; gap: 12px; align-items: center; font-size: 15px"><span style="width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; background: var(--okbg); color: var(--ok); display: flex; align-items: center; justify-content: center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Ingresos, gastos y ganancia del día, la semana o el mes</div></div>
 </div>
+<div class="glass lift rise" style="padding: 32px; border-radius: 28px">
+<div class="lbl acc" style="font-size: 10px">Estudio de servicios</div>
+<h3 class="t" style="margin: 12px 0 0; font-size: 26px; line-height: 1.15">VON AI Studio</h3>
+<p style="margin: 12px 0 0; font-size: 16px; line-height: 1.6; color: var(--fg2)">El sistema con el que manejo mi estudio: el de la imagen de arriba. Cobros, clientes, prospección y tareas en un solo lugar.</p>
+<div style="display: grid; gap: 10px; margin-top: 20px"><div style="display: flex; gap: 12px; align-items: center; font-size: 15px"><span style="width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; background: var(--okbg); color: var(--ok); display: flex; align-items: center; justify-content: center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Cobros pendientes y vencidos del mes</div><div style="display: flex; gap: 12px; align-items: center; font-size: 15px"><span style="width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; background: var(--okbg); color: var(--ok); display: flex; align-items: center; justify-content: center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>CRM y seguimiento de prospectos</div><div style="display: flex; gap: 12px; align-items: center; font-size: 15px"><span style="width: 26px; height: 26px; flex-shrink: 0; border-radius: 50%; background: var(--okbg); color: var(--ok); display: flex; align-items: center; justify-content: center"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"></path></svg></span>Tareas y calendario con avisos de atraso</div></div>
 </div>
-<div class="glass" style="padding: 12px; border-radius: 30px">
-<img src="/img/apple-service-panel.webp" width="1440" height="812" loading="lazy" decoding="async" alt="Panel del sistema de gestión de Apple Service Salta con ingresos, reparaciones activas, gastos y stock crítico" style="width: 100%; display: block; border-radius: 20px" />
 </div>
 </div>
 </section>
@@ -450,7 +452,7 @@ ${(faqs).map((f) => html`
 <section class="band " aria-label="Rubros con los que trabajo" style="padding: 26px 0; border-top: 1px solid var(--line); overflow: clip">
 <div style="display: flex; align-items: center; gap: 28px">
 <span class="lbl" style="flex-shrink: 0; padding-left: 32px; font-size: 10px">Trabajo con</span>
-<div style="overflow: clip; flex-grow: 1; -webkit-mask-image: linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask-image: linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)">
+<div style="overflow: clip; flex-grow: 1; min-width: 0; -webkit-mask-image: linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask-image: linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)">
 <div class="rub"><span>${rubros}</span><span aria-hidden="true">${rubros}</span></div>
 </div>
 </div>

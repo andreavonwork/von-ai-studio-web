@@ -75,7 +75,7 @@ class Component extends DCLogic {
     var collect = () => {
       var root = el.parentNode; if (!root) return;
       var skip = '.glass, .glass-2, header, #ficha, .fab';
-      s.txt = Array.prototype.filter.call(root.querySelectorAll('.content h1, .content h2, .content h3, .content p, .content .lbl, .content summary, .content li, .content .cta-link, .content .split-line, .content .marq span'), (n) => !n.closest(skip) && n.textContent.trim().length > 0);
+      s.txt = Array.prototype.filter.call(root.querySelectorAll('.content footer .foot-grid > div, .content footer .wrap > div:last-child, .content [aria-label^="Rubros"] .rub, .content h1, .content h2, .content h3, .content p, .content .lbl, .content summary, .content li, .content .cta-link, .content .split-line, .content .marq span'), (n) => !n.closest(skip) && n.textContent.trim().length > 0);
       s.glass = Array.prototype.filter.call(root.querySelectorAll('.content .glass, .content .glass-2'), (n) => n.offsetWidth > 160 && !n.parentNode.closest('.glass, .glass-2'));
     };
     collect();
@@ -664,7 +664,7 @@ ${(w.isLevels) ? html`<div style="margin-top: 8px; display: grid; gap: 7px">${(w
 <section class="band ${bands.caso}" id="caso" style="padding: 80px 0 120px">
 <div class="wrap two-col">
 <div class="glass" style="padding: 14px; border-radius: 32px">
-<img src="/img/apple-service-panel.webp" width="1440" height="812" loading="lazy" decoding="async" alt="Panel del sistema de gestión de Apple Service Salta con ingresos, reparaciones activas, gastos y stock crítico" style="width: 100%; display: block; border-radius: 20px" />
+<img src="/img/apple-service-panel.webp" width="1440" height="812" loading="lazy" decoding="async" alt="Panel del sistema de gestión de Apple Service Salta con ingresos, reparaciones activas, gastos y stock crítico" style="width: 100%; height: auto; display: block; border-radius: 20px" />
 </div>
 <div class="rise">
 <div class="lbl acc">Caso real</div>
@@ -830,7 +830,7 @@ ${(cmpHint) ? html`<div class="cmp-tip lbl" style="font-size: 10px; color: #f3ef
 <section class="band ${bands.rubros}" aria-label="Rubros con los que trabajo" style="padding: 26px 0; border-top: 1px solid var(--line); overflow: clip">
 <div style="display: flex; align-items: center; gap: 28px">
 <span class="lbl" style="flex-shrink: 0; padding-left: 32px; font-size: 10px">Trabajo con</span>
-<div style="overflow: clip; flex-grow: 1; -webkit-mask-image: linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask-image: linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)">
+<div style="overflow: clip; flex-grow: 1; min-width: 0; -webkit-mask-image: linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent); mask-image: linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)">
 <div class="rub"><span>${rubros}</span><span aria-hidden="true">${rubros}</span></div>
 </div>
 </div>
