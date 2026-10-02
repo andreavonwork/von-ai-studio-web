@@ -59,7 +59,7 @@ class Component extends DCLogic {
       for (var d = 0; d < 10; d++) ac.fillText(String(d), d * CS + CS / 2, c * CS + CS / 2 + 0.5);
     }
     var mask = document.createElement('canvas');
-    var s = { el: el, ctx: el.getContext('2d'), pts: pts, atlas: atlas, CS: CS, NC: NC, dpr: dpr, mask: mask, mctx: mask.getContext('2d'), mx: 0, my: 0, hasM: false, px: 0, py: 0, time: 0, last: performance.now(), cx: null, cy: null, gx: null, gy: null, fade: 0, txt: [], glass: [], frame: 0, reduce: reduce };
+    var s = { el: el, ctx: el.getContext('2d'), pts: pts, atlas: atlas, CS: CS, NC: NC, dpr: dpr, mask: mask, mctx: mask.getContext('2d', { willReadFrequently: true }), mx: 0, my: 0, hasM: false, px: 0, py: 0, time: 0, last: performance.now(), cx: null, cy: null, gx: null, gy: null, fade: 0, txt: [], glass: [], frame: 0, reduce: reduce };
     s.onMove = (e) => { s.mx = e.clientX; s.my = e.clientY; s.hasM = true; };
     s.onLeave = () => { s.hasM = false; };
     window.addEventListener('pointermove', s.onMove, { passive: true });
@@ -103,7 +103,6 @@ class Component extends DCLogic {
     var gr = Math.max(W, H) * 0.42;
     var gg = c.createRadialGradient(s.gx, s.gy, 0, s.gx, s.gy, gr);
     gg.addColorStop(0, 'rgba(160,20,56,' + (0.22 * s.fade) + ')'); gg.addColorStop(0.45, 'rgba(110,14,40,' + (0.09 * s.fade) + ')'); gg.addColorStop(1, 'rgba(9,9,11,0)');
-    c.fillStyle = gg; c.fillRect(0, 0, W, H);
 
     var cyc = T / 20 + sc / 5200;
     var m = 0.5 - 0.5 * Math.cos(cyc * Math.PI * 2);
@@ -152,22 +151,35 @@ class Component extends DCLogic {
       s.rects = rects;
     }
     if (s.rects.length) {
-      var K = 8, mw = Math.ceil(W / K), mh = Math.ceil(H / K), mk = s.mask, mc = s.mctx;
+      var K = 12, mw = Math.ceil(W / K), mh = Math.ceil(H / K), mk = s.mask, mc = s.mctx;
       if (mk.width !== mw || mk.height !== mh) { mk.width = mw; mk.height = mh; }
       mc.clearRect(0, 0, mw, mh);
-      try { mc.filter = 'blur(2.5px)'; } catch (er) {}
+      mc.fillStyle = '#000';
       for (var r2 = 0; r2 < s.rects.length; r2++) {
-        var rr = s.rects[r2], pad = rr[4] === 1 ? 30 : 6;
-        mc.fillStyle = 'rgba(0,0,0,' + rr[4] + ')';
+        var rr = s.rects[r2], pad = rr[4] === 1 ? 10 : 0;
+        if (rr[4] !== 1) continue;
         mc.fillRect((rr[0] - pad) / K, (rr[1] - pad) / K, (rr[2] + pad * 2) / K, (rr[3] + pad * 2) / K);
       }
+      var img = mc.getImageData(0, 0, mw, mh), px = img.data, n2 = mw * mh, A = s.mA && s.mA.length === n2 ? s.mA : (s.mA = new Float32Array(n2)), B = s.mB && s.mB.length === n2 ? s.mB : (s.mB = new Float32Array(n2));
+      for (var q = 0; q < n2; q++) A[q] = px[q * 4 + 3] / 255;
+      var rad = 3;
+      for (var pass = 0; pass < 3; pass++) {
+        for (var yy = 0; yy < mh; yy++) { var row = yy * mw; for (var xx = 0; xx < mw; xx++) { var acc = 0; for (var k = -rad; k <= rad; k++) { var xi = xx + k; acc += A[row + (xi < 0 ? 0 : xi >= mw ? mw - 1 : xi)]; } B[row + xx] = acc / (2 * rad + 1); } }
+        for (var x2 = 0; x2 < mw; x2++) { for (var y2 = 0; y2 < mh; y2++) { var acc2 = 0; for (var k2 = -rad; k2 <= rad; k2++) { var yi = y2 + k2; acc2 += B[(yi < 0 ? 0 : yi >= mh ? mh - 1 : yi) * mw + x2]; } A[y2 * mw + x2] = acc2 / (2 * rad + 1); } }
+      }
+      for (var q2 = 0; q2 < n2; q2++) { var v = Math.min(1, A[q2] * 1.35); px[q2 * 4] = px[q2 * 4 + 1] = px[q2 * 4 + 2] = 0; px[q2 * 4 + 3] = Math.round(v * v * (3 - 2 * v) * 255); }
+      mc.putImageData(img, 0, 0);
       c.save();
       c.globalCompositeOperation = 'destination-out';
-      c.globalAlpha = 0.8;
+      c.globalAlpha = 0.72;
       c.imageSmoothingEnabled = true;
       c.drawImage(mk, 0, 0, mw, mh, 0, 0, mw * K, mh * K);
       c.restore();
     }
+    c.save();
+    c.globalCompositeOperation = 'destination-over';
+    c.fillStyle = gg; c.fillRect(0, 0, W, H);
+    c.restore();
   }
   scrollFx() {
     var vh = window.innerHeight, cl = (v) => (v < 0 ? 0 : v > 1 ? 1 : v);
