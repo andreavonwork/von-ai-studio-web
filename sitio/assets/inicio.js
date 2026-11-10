@@ -365,9 +365,8 @@ function tpl(v) {
 <header style="position: sticky; top: 16px; z-index: 50; padding-top: 16px">
 <div class="wrap">
 <div class="glass" style="border-radius: 999px; height: 66px; padding: 0 10px 0 22px; display: flex; align-items: center; justify-content: space-between">
-<a href="#inicio" style="text-decoration: none; color: var(--fg); display: flex; align-items: center; gap: 12px">
-<span style="width: 28px; height: 28px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 3px"><span style="border-radius: 3px; background: #d4c8bc"></span><span style="border-radius: 3px; background: #a08c7c"></span><span style="border-radius: 3px; background: #a08c7c"></span><span style="border-radius: 3px; background: #5d0f22"></span></span>
-<span style="display: flex; flex-direction: column; line-height: 1.1"><span class="t" style="font-size: 16px">VON AI Studio</span><span class="lbl" style="font-size: 8px">Soluciones digitales</span></span>
+<a href="#inicio" aria-label="VON AI Studio, inicio" style="text-decoration: none; color: var(--fg); display: flex; align-items: center; gap: 12px">
+<span class="vlogo" style="font-size: 21px"><span class="vl-von">VON</span><span class="vl-sw"><span class="vl-ai">AI</span><span class="vl-k"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5c.6 4.8 2.7 7.6 6.2 9 1.2.5 2.6.8 4.3 1-4.9.6-7.7 2.8-9.1 6.4-.5 1.2-.8 2.5-1 4.1-.6-4.9-2.8-7.7-6.4-9.1-1.2-.5-2.5-.8-4.1-1 4.9-.6 7.7-2.8 9.1-6.4.5-1.2.8-2.5 1-4z"></path></svg></span></span><span class="vl-st">Studio</span></span>
 </a>
 <nav class="nav-links" aria-label="Principal" style="display: flex; gap: 2px">
 <a class="nav-link" href="#servicios">Servicios</a>
@@ -780,7 +779,7 @@ ${(quick).map((q) => html`<button type="button" class="qr" onClick="${q.pick}">$
 <div class="cmp-after gm" style="background: #fff; padding: 22px 24px">
 <div style="text-align: right"><span class="lbl" style="font-size: 10px; color: #fff; background: #8c0f32; border-radius: 999px; padding: 6px 12px">Después</span></div>
 <div style="height: 130px; margin-top: 14px; display: grid; grid-template-columns: 2fr 1fr 1fr; gap: 5px">
-<div style="border-radius: 14px 4px 4px 14px; background: linear-gradient(135deg,#1b1719,#3a0a18); display: flex; align-items: center; justify-content: center"><span style="width: 44px; height: 44px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 4px"><span style="border-radius: 4px; background: #d4c8bc"></span><span style="border-radius: 4px; background: #a08c7c"></span><span style="border-radius: 4px; background: #a08c7c"></span><span style="border-radius: 4px; background: #d01f45"></span></span></div>
+<div style="border-radius: 14px 4px 4px 14px; background: linear-gradient(135deg,#1b1719,#3a0a18); display: flex; align-items: center; justify-content: center"><svg width="58" height="58" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64"><defs><linearGradient id="gbs" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#7B1A31"/><stop offset=".48" stop-color="#5D0F22"/><stop offset="1" stop-color="#3A0715"/></linearGradient><linearGradient id="gbk" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#FFFFFF"/><stop offset=".55" stop-color="#F7F5F2"/><stop offset="1" stop-color="#E4DCD3"/></linearGradient></defs><rect width="64" height="64" rx="14" fill="#1C1C1E"/><rect x="5.5" y="19" width="53" height="26" rx="13.0" fill="url(#gbs)" stroke="rgba(247,245,242,.32)" stroke-width="0.9"/><path d="M25.28888252148997 26.28 21.093123209169054 37.72H18.306876790830945L14.111117478510028 26.28H16.569570200573065L19.716389684813752 35.37627507163324L22.846819484240687 26.28Z" fill="#F7F5F2"/><circle cx="45.50" cy="32.0" r="10.14" fill="url(#gbk)"/><path d="M12 1.5c.6 4.8 2.7 7.6 6.2 9 1.2.5 2.6.8 4.3 1-4.9.6-7.7 2.8-9.1 6.4-.5 1.2-.8 2.5-1 4.1-.6-4.9-2.8-7.7-6.4-9.1-1.2-.5-2.5-.8-4.1-1 4.9-.6 7.7-2.8 9.1-6.4.5-1.2.8-2.5 1-4z" transform="translate(39.822 26.322) scale(0.4732)" fill="#5D0F22"/></svg></div>
 <div style="border-radius: 4px; background: linear-gradient(160deg,#e9e3dc,#b9aa9b)"></div>
 <div style="border-radius: 4px 14px 14px 4px; background: linear-gradient(160deg,#8c0f32,#e2405f)"></div>
 </div>
@@ -852,7 +851,7 @@ ${(cmpHint) ? html`<div class="cmp-tip lbl" style="font-size: 10px; color: #f3ef
 <div class="wrap">
 <div class="foot-grid">
 <div>
-<div style="display: flex; align-items: center; gap: 12px"><span style="width: 28px; height: 28px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 3px"><span style="border-radius: 3px; background: #d4c8bc"></span><span style="border-radius: 3px; background: #a08c7c"></span><span style="border-radius: 3px; background: #a08c7c"></span><span style="border-radius: 3px; background: #5d0f22"></span></span><span class="t" style="font-size: 18px">VON AI Studio</span></div>
+<div style="display: flex; align-items: center; gap: 12px"><span class="vlogo" style="font-size: 24px"><span class="vl-von">VON</span><span class="vl-sw"><span class="vl-ai">AI</span><span class="vl-k"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5c.6 4.8 2.7 7.6 6.2 9 1.2.5 2.6.8 4.3 1-4.9.6-7.7 2.8-9.1 6.4-.5 1.2-.8 2.5-1 4.1-.6-4.9-2.8-7.7-6.4-9.1-1.2-.5-2.5-.8-4.1-1 4.9-.6 7.7-2.8 9.1-6.4.5-1.2.8-2.5 1-4z"></path></svg></span></span><span class="vl-st">Studio</span></span></div>
 <p style="margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: var(--fg2); max-width: 320px">Sistemas de gestión a medida y automatización con IA para pymes de Salta.</p>
 <a class="btn btn-main" href="${waGeneral}" style="margin-top: 20px; min-height: 46px">Escribime por WhatsApp</a>
 </div>

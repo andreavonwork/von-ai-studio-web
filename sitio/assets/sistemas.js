@@ -269,9 +269,8 @@ function tpl(v) {
 <header style="position: sticky; top: 16px; z-index: 50; padding-top: 16px">
 <div class="wrap">
 <div class="glass" style="border-radius: 999px; height: 66px; padding: 0 10px 0 22px; display: flex; align-items: center; justify-content: space-between">
-<a href="/" style="text-decoration: none; color: var(--fg); display: flex; align-items: center; gap: 12px">
-<span style="width: 28px; height: 28px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 3px"><span style="border-radius: 3px; background: #d4c8bc"></span><span style="border-radius: 3px; background: #a08c7c"></span><span style="border-radius: 3px; background: #a08c7c"></span><span style="border-radius: 3px; background: #5d0f22"></span></span>
-<span style="display: flex; flex-direction: column; line-height: 1.1"><span class="t" style="font-size: 16px">VON AI Studio</span><span class="lbl" style="font-size: 8px">Soluciones digitales</span></span>
+<a href="/" aria-label="VON AI Studio, inicio" style="text-decoration: none; color: var(--fg); display: flex; align-items: center; gap: 12px">
+<span class="vlogo" style="font-size: 21px"><span class="vl-von">VON</span><span class="vl-sw"><span class="vl-ai">AI</span><span class="vl-k"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5c.6 4.8 2.7 7.6 6.2 9 1.2.5 2.6.8 4.3 1-4.9.6-7.7 2.8-9.1 6.4-.5 1.2-.8 2.5-1 4.1-.6-4.9-2.8-7.7-6.4-9.1-1.2-.5-2.5-.8-4.1-1 4.9-.6 7.7-2.8 9.1-6.4.5-1.2.8-2.5 1-4z"></path></svg></span></span><span class="vl-st">Studio</span></span>
 </a>
 <nav class="nav-links" aria-label="Principal" style="display: flex; gap: 2px">
 <a class="nav-link" href="/">Inicio</a>
@@ -474,7 +473,7 @@ ${(faqs).map((f) => html`
 <div class="wrap">
 <div class="foot-grid">
 <div>
-<div style="display: flex; align-items: center; gap: 12px"><span style="width: 28px; height: 28px; display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 3px"><span style="border-radius: 3px; background: #d4c8bc"></span><span style="border-radius: 3px; background: #a08c7c"></span><span style="border-radius: 3px; background: #a08c7c"></span><span style="border-radius: 3px; background: #5d0f22"></span></span><span class="t" style="font-size: 18px">VON AI Studio</span></div>
+<div style="display: flex; align-items: center; gap: 12px"><span class="vlogo" style="font-size: 24px"><span class="vl-von">VON</span><span class="vl-sw"><span class="vl-ai">AI</span><span class="vl-k"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 1.5c.6 4.8 2.7 7.6 6.2 9 1.2.5 2.6.8 4.3 1-4.9.6-7.7 2.8-9.1 6.4-.5 1.2-.8 2.5-1 4.1-.6-4.9-2.8-7.7-6.4-9.1-1.2-.5-2.5-.8-4.1-1 4.9-.6 7.7-2.8 9.1-6.4.5-1.2.8-2.5 1-4z"></path></svg></span></span><span class="vl-st">Studio</span></span></div>
 <p style="margin: 14px 0 0; font-size: 15px; line-height: 1.6; color: var(--fg2); max-width: 320px">Sistemas de gestión a medida y automatización con IA para pymes de Salta.</p>
 <a class="btn btn-main" href="${waGeneral}" style="margin-top: 20px; min-height: 46px">Escribime por WhatsApp</a>
 </div>
